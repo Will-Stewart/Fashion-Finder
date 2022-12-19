@@ -47,7 +47,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               size: 40, color: Color.fromARGB(255, 255, 255, 255)),
         ],
         color: const Color.fromARGB(255, 41, 41, 41),
-        buttonBackgroundColor: Color.fromARGB(255, 41, 41, 41),
+        buttonBackgroundColor: const Color.fromARGB(255, 41, 41, 41),
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInCubic,
         animationDuration: const Duration(milliseconds: 300),

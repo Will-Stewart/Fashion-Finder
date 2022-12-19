@@ -6,23 +6,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          )),
-          title: Text(
-            'Cart Page',
-            style: GoogleFonts.libreBaskerville(
-                textStyle:
-                    const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                fontSize: 24),
-          ),
-          backgroundColor: const Color.fromARGB(255, 41, 41, 41),
-          shadowColor: const Color.fromARGB(255, 41, 41, 41),
-          elevation: 0,
-          centerTitle: true,
-        ),
+        appBar: DarkBar(),
         body: ListView(children: <Widget>[
           recentScanned,
           savedCart,
@@ -30,8 +14,38 @@ class CartPage extends StatelessWidget {
       );
 }
 
-// Widgets
+//Appbar Class
+class DarkBar extends StatelessWidget implements PreferredSizeWidget {
+  const DarkBar({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(30),
+      )),
+      title: Text(
+        'Cart Page',
+        style: GoogleFonts.libreBaskerville(
+            textStyle:
+                const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+            fontSize: 24),
+      ),
+      backgroundColor: const Color.fromARGB(255, 41, 41, 41),
+      shadowColor: const Color.fromARGB(255, 41, 41, 41),
+      elevation: 0,
+      centerTitle: true,
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+// Widgets
 Widget recentScanned = Column(
   children: [
     Padding(
