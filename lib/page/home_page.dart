@@ -56,8 +56,8 @@ class _HomeState extends State<Home> {
         body: Stack(
           children: [
             SizedBox(
-              height: 800,
-              width: 400,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: controller == null
                   ? const Center(child: Text("Loading Camera..."))
                   : !controller!.value.isInitialized
