@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../functions/vision_api.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -83,7 +84,9 @@ class _HomeState extends State<Home> {
                         //check if controller is initialized
                         image = await controller!.takePicture(); //capture image
                         setState(() {
-                          //update UI
+                          File photoAsFile = File(image?.path ??
+                              ''); // use null-aware operator to access path
+                          sendImageToCustomVision(photoAsFile);
                         });
                       }
                     }
