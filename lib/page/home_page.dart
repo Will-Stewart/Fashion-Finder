@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../functions/vision_api.dart';
+import '../functions/shopify_api.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -86,7 +87,16 @@ class _HomeState extends State<Home> {
                         setState(() {
                           File photoAsFile = File(image?.path ??
                               ''); // use null-aware operator to access path
-                          sendImageToCustomVision(photoAsFile);
+                          sendImageToCustomVision(photoAsFile)
+                              .then((predictedTags) {
+                            // predictedTags is the result of sendImageToCustomVision
+                            return searchProductsByTags(predictedTags);
+                          }).then((matchingProducts) {
+                            // matchingProducts is the result of searchProductsByTags
+                            // do something with matchingProducts
+                          }).catchError((error) {
+                            // handle errors from either sendImageToCustomVision or searchProductsByTags
+                          });
                         });
                       }
                     }

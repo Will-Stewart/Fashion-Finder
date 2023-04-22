@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-Future<void> sendImageToCustomVision(File imageFile) async {
+Future<List<String>> sendImageToCustomVision(File imageFile) async {
   const String endpoint =
       'https://fashion-finder.cognitiveservices.azure.com/customvision/v3.0/Prediction/444b21d0-fbdf-495d-a42e-33d060a50d87/classify/iterations/Iteration4/image';
   const String subscriptionKey = '1e8bf7ed8e764d0ab6c69e65bd5a51f4';
@@ -21,11 +21,13 @@ Future<void> sendImageToCustomVision(File imageFile) async {
 
   final returnedJSON = jsonDecode(response.body);
 
-  final tagNames = returnedJSON['predictions']
-      .map((prediction) => prediction['tagName'] as String)
+  List<dynamic> dynamicList = returnedJSON['predictions']
+      .map((prediction) => prediction['tagName'])
       .take(5)
-      .join(', ');
+      .toList();
 
-  print(tagNames);
-  print("RAN FINE");
+  List<String> finalTags = dynamicList.cast<String>();
+
+  print(finalTags);
+  return finalTags;
 }
