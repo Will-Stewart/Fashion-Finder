@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +29,10 @@ class _HomeState extends State<Home> {
   XFile? image;
   String? textResponse;
   String? predictedText;
+  Uint8List? productImage;
+  ValueNotifier<String?> predictedTextNotifier = ValueNotifier<String?>(null);
+  ValueNotifier<Uint8List?> productImageNotifier =
+      ValueNotifier<Uint8List?>(null);
 
   @override
   void initState() {
@@ -103,7 +108,15 @@ class _HomeState extends State<Home> {
                             String itemTitle = matchingProducts['title'];
 
                             setState(() {
-                              predictedText = itemTitle;
+                              predictedTextNotifier.value = itemTitle;
+                              int productId = matchingProducts['id'];
+                              getProductImage(productId).then((imageData) {
+                                setState(() {
+                                  productImageNotifier.value = imageData;
+                                });
+                              }).catchError((error) {
+                                // handle errors from getProductImage
+                              });
                             });
                           }).catchError((error) {
                             // handle errors from either sendImageToCustomVision or searchProductsByTags
@@ -118,14 +131,34 @@ class _HomeState extends State<Home> {
                 child: const Icon(Icons.camera),
               ),
             ),
-            Center(
-              child: Column(
-                children: [
-                  ReturnedItem(
-                      text: predictedText ?? 'Take a photo to get started!'),
-                ],
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
+                // Adjust this value to position the container
+                child: SafeArea(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10.0),
+                    child: ValueListenableBuilder<String?>(
+                      valueListenable: predictedTextNotifier,
+                      builder: (context, text, child) =>
+                          ValueListenableBuilder<Uint8List?>(
+                        valueListenable: productImageNotifier,
+                        builder: (context, image, child) => ReturnedItem(
+                          text: text ?? 'Take a photo to get started!',
+                          image: image,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            )
+            ),
           ],
         ));
   }
@@ -133,24 +166,38 @@ class _HomeState extends State<Home> {
 
 class ReturnedItem extends StatelessWidget {
   final String text;
-  const ReturnedItem({Key? key, required this.text}) : super(key: key);
+  final Uint8List? image;
+  const ReturnedItem({Key? key, required this.text, this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 120),
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 18, color: Colors.black),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        if (image != null)
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.memory(
+                image!,
+                width: 90,
+                height: 90,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        Expanded(
+          flex: 1,
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18, color: Colors.black),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

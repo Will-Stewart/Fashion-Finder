@@ -1,3 +1,7 @@
+archive
+2.12
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.3.7/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.3.7/lib/
 async
 2.18
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.10.0/
@@ -38,6 +42,10 @@ collection
 2.12
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.0/
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.0/lib/
+convert
+2.18
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/lib/
 cross_file
 2.17
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4/
@@ -86,6 +94,10 @@ http_parser
 2.12
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/lib/
+image
+2.15
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/image-4.0.15/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/image-4.0.15/lib/
 js
 2.16
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.5/
@@ -138,6 +150,10 @@ path_provider_windows
 2.17
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.5/
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.5/lib/
+petitparser
+2.18
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.1.0/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.1.0/lib/
 platform
 2.12
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.0/
@@ -146,6 +162,10 @@ plugin_platform_interface
 2.17
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.4/
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib/
+pointycastle
+2.14
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.3/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.3/lib/
 process
 2.14
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/process-4.2.4/
@@ -214,6 +234,10 @@ xdg_directories
 2.17
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.0/
 file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.0/lib/
+xml
+2.18
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.2.2/
+file:///C:/Users/mrwil/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.2.2/lib/
 fashionfinder
 2.18
 file:///C:/Users/mrwil/Documents/Coding/Fashion-Finder/
