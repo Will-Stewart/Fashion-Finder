@@ -23,9 +23,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<CameraDescription>? cameras; //list out the camera available
-  CameraController? controller; //controller for camera
-  XFile? image; //for caputred image
+  List<CameraDescription>? cameras;
+  CameraController? controller;
+  XFile? image;
+  String? textResponse;
+  String? predictedText;
 
   @override
   void initState() {
@@ -90,10 +92,19 @@ class _HomeState extends State<Home> {
                           sendImageToCustomVision(photoAsFile)
                               .then((predictedTags) {
                             // predictedTags is the result of sendImageToCustomVision
+
+                            // Update the predictedText with the predicted tags
+
                             return searchProductsByTags(predictedTags);
                           }).then((matchingProducts) {
                             // matchingProducts is the result of searchProductsByTags
                             // do something with matchingProducts
+
+                            String itemTitle = matchingProducts['title'];
+
+                            setState(() {
+                              predictedText = itemTitle;
+                            });
                           }).catchError((error) {
                             // handle errors from either sendImageToCustomVision or searchProductsByTags
                           });
@@ -107,8 +118,40 @@ class _HomeState extends State<Home> {
                 child: const Icon(Icons.camera),
               ),
             ),
+            Center(
+              child: Column(
+                children: [
+                  ReturnedItem(
+                      text: predictedText ?? 'Take a photo to get started!'),
+                ],
+              ),
+            )
           ],
         ));
+  }
+}
+
+class ReturnedItem extends StatelessWidget {
+  final String text;
+  const ReturnedItem({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 120),
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 18, color: Colors.black),
+        ),
+      ),
+    );
   }
 }
 
