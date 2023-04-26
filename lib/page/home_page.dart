@@ -239,8 +239,10 @@ class ReturnedItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: IconButton(
-              onPressed: () {
+              onPressed: () async {
                 // Handle button action here
+                String? productURl = await getProductUrl(7772869361887);
+                print(productURl);
               },
               icon: const Icon(
                 Icons.local_mall,
