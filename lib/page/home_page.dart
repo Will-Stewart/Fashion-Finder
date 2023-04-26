@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
   XFile? image;
   String? textResponse;
   String? predictedText;
+  String? itemVendor; // Add this line to declare itemVendor
   Uint8List? productImage;
   ValueNotifier<String?> predictedTextNotifier = ValueNotifier<String?>(null);
   ValueNotifier<Uint8List?> productImageNotifier =
@@ -106,6 +107,8 @@ class _HomeState extends State<Home> {
                             // do something with matchingProducts
 
                             String itemTitle = matchingProducts['title'];
+                            itemVendor = matchingProducts[
+                                'vendor']; // Update itemVendor directly
 
                             setState(() {
                               predictedTextNotifier.value = itemTitle;
@@ -137,21 +140,28 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
                 // Adjust this value to position the container
                 child: SafeArea(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 10.0),
-                    child: ValueListenableBuilder<String?>(
-                      valueListenable: predictedTextNotifier,
-                      builder: (context, text, child) =>
-                          ValueListenableBuilder<Uint8List?>(
-                        valueListenable: productImageNotifier,
-                        builder: (context, image, child) => ReturnedItem(
-                          text: text ?? 'Take a photo to get started!',
-                          image: image,
+                  child: IntrinsicHeight(
+                    child: SizedBox(
+                      height: 120, // Set a maximum height for the container
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        child: ValueListenableBuilder<String?>(
+                          valueListenable: predictedTextNotifier,
+                          builder: (context, text, child) =>
+                              ValueListenableBuilder<Uint8List?>(
+                            valueListenable: productImageNotifier,
+                            builder: (context, image, child) => ReturnedItem(
+                              text: text ?? 'Take a photo to get started!',
+                              vendor:
+                                  itemVendor, // itemVendor is now accessible here
+                              image: image,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -166,8 +176,9 @@ class _HomeState extends State<Home> {
 
 class ReturnedItem extends StatelessWidget {
   final String text;
+  final String? vendor;
   final Uint8List? image;
-  const ReturnedItem({Key? key, required this.text, this.image})
+  const ReturnedItem({Key? key, required this.text, this.vendor, this.image})
       : super(key: key);
 
   @override
@@ -191,10 +202,31 @@ class ReturnedItem extends StatelessWidget {
           ),
         Expanded(
           flex: 1,
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18, color: Colors.black),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.libreBaskerville(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              if (vendor != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text(
+                    vendor!,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.libreBaskerville(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                ),
+            ],
           ),
         ),
       ],
