@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
               right: 30,
               left: 30,
               child: FloatingActionButton(
-                backgroundColor: const Color.fromARGB(255, 29, 29, 29),
+                backgroundColor: const Color.fromARGB(255, 41, 41, 41),
                 onPressed: () async {
                   try {
                     if (controller != null) {
@@ -184,7 +184,7 @@ class ReturnedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (image != null)
@@ -229,6 +229,26 @@ class ReturnedItem extends StatelessWidget {
             ],
           ),
         ),
+        if (text != 'Take a photo to get started!' &&
+            vendor != null) // Added condition
+          Container(
+            height: 90,
+            width: 90,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 41, 41, 41),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: IconButton(
+              onPressed: () {
+                // Handle button action here
+              },
+              icon: const Icon(
+                Icons.local_mall,
+                color: Colors.white,
+                size: 40,
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -72,3 +72,25 @@ Future<Uint8List?> getProductImage(int productId) async {
     throw Exception('Failed to load product images');
   }
 }
+
+Future<String?> getProductUrl(int productId) async {
+  String endpoint = '/admin/api/2023-04/products/$productId.json';
+  String url = 'https://$apiKey:$password@$storeUrl$endpoint';
+
+  http.Response response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> jsonData = json.decode(response.body);
+    Map<String, dynamic> product = jsonData['product'];
+
+    String? productUrl = product['handle'];
+    if (productUrl != null) {
+      productUrl = 'https://$storeUrl/products/$productUrl';
+      return productUrl;
+    } else {
+      return null;
+    }
+  } else {
+    throw Exception('Failed to load product URL');
+  }
+}
