@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fashionfinder/page/store_page.dart';
 import '../functions/vision_api.dart';
 import '../functions/shopify_api.dart';
 
@@ -238,21 +239,40 @@ class ReturnedItem extends StatelessWidget {
               color: const Color.fromARGB(255, 41, 41, 41),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: IconButton(
-              onPressed: () async {
-                // Handle button action here
-                String? productURl = await getProductUrl(7772869361887);
-                print(productURl);
+            child: Builder(
+              builder: (BuildContext buttonContext) {
+                return IconButton(
+                  onPressed: () {
+                    getProductAndNavigate(buttonContext);
+                  },
+                  icon: const Icon(
+                    Icons.local_mall,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                );
               },
-              icon: const Icon(
-                Icons.local_mall,
-                color: Colors.white,
-                size: 40,
-              ),
             ),
           ),
       ],
     );
+  }
+}
+
+Future<void> getProductAndNavigate(BuildContext context) async {
+  String? productUrl = await getProductUrl(7772869361887);
+  print(productUrl);
+
+  if (productUrl != null) {
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StorePage(url: productUrl),
+      ),
+    );
+  } else {
+    // Handle the case when productUrl is null, e.g., show a message
   }
 }
 

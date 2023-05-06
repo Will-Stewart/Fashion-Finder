@@ -1,19 +1,51 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BorderRadius,
+        BuildContext,
+        Color,
+        Icon,
+        IconButton,
+        Icons,
+        Key,
+        Radius,
+        RoundedRectangleBorder,
+        Scaffold,
+        Size,
+        State,
+        StatefulWidget,
+        Text,
+        TextStyle,
+        Widget,
+        kToolbarHeight;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class StorePage extends StatelessWidget {
-  const StorePage({Key? key}) : super(key: key);
+class StorePage extends StatefulWidget {
+  final String url;
+
+  // Default constructor with required parameter
+  StorePage({Key? key, required this.url}) : super(key: key);
+
+  // Additional constructor with default URL value
+  StorePage.defaultUrl({Key? key})
+      : url = 'https://modassilviabenitez.myshopify.com/',
+        super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        extendBodyBehindAppBar: false,
-        body: WebViewApp(),
-      );
+  _StorePageState createState() => _StorePageState();
+}
+
+class _StorePageState extends State<StorePage> {
+  @override
+  Widget build(BuildContext context) {
+    return WebViewApp(url: widget.url);
+  }
 }
 
 class WebViewApp extends StatefulWidget {
-  WebViewApp({super.key});
+  final String url;
+  WebViewApp({Key? key, required this.url}) : super(key: key);
   late WebViewController controller;
 
   @override
@@ -58,7 +90,7 @@ class _WebViewAppState extends State<WebViewApp> {
         centerTitle: true,
       ),
       body: WebView(
-        initialUrl: 'https://modassilviabenitez.myshopify.com/',
+        initialUrl: widget.url,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           widget.controller = webViewController;

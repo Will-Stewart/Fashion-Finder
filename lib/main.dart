@@ -23,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 1;
 
   final Screens = [
-    StorePage(),
+    StorePage.defaultUrl(),
     HomePage(),
     CartPage(),
   ];
