@@ -1,16 +1,3 @@
-# fashionfinder
+# Fashion Finder
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This repository presents the development of an AI-based app, Fashion Finder, designed to revolutionize the fashion shopping experience by bridging the gap between consumers and their desired fashion items. By utilizing cutting-edge technologies such as the Microsoft Azure Custom Vision API and Shopify API, the app enables users to upload images of clothing items they like and subsequently find the nearest match in a Shopify store. Developed using the Dart programming language and Flutter framework, Fashion Finder ensures cross-platform compatibility and a visually appealing user interface, catering to a wide audience on both Android and iOS devices. Overall, Fashion Finder aims to provide a personalized, efficient, and enjoyable shopping experience, leveraging AI to transform the way users discover and purchase clothing. 
