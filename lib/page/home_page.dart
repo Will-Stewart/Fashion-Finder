@@ -30,7 +30,8 @@ class _HomeState extends State<Home> {
   XFile? image;
   String? textResponse;
   String? predictedText;
-  String? itemVendor; // Add this line to declare itemVendor
+  String? itemVendor;
+  int? productId;
   Uint8List? productImage;
   ValueNotifier<String?> predictedTextNotifier = ValueNotifier<String?>(null);
   ValueNotifier<Uint8List?> productImageNotifier =
@@ -113,8 +114,8 @@ class _HomeState extends State<Home> {
 
                             setState(() {
                               predictedTextNotifier.value = itemTitle;
-                              int productId = matchingProducts['id'];
-                              getProductImage(productId).then((imageData) {
+                              productId = matchingProducts['id'];
+                              getProductImage(productId!).then((imageData) {
                                 setState(() {
                                   productImageNotifier.value = imageData;
                                 });
@@ -158,9 +159,10 @@ class _HomeState extends State<Home> {
                             valueListenable: productImageNotifier,
                             builder: (context, image, child) => ReturnedItem(
                               text: text ?? 'Take a photo to get started!',
-                              vendor:
-                                  itemVendor, // itemVendor is now accessible here
+                              vendor: itemVendor,
                               image: image,
+                              productId:
+                                  productId, // Pass productId to ReturnedItem
                             ),
                           ),
                         ),
@@ -179,7 +181,9 @@ class ReturnedItem extends StatelessWidget {
   final String text;
   final String? vendor;
   final Uint8List? image;
-  const ReturnedItem({Key? key, required this.text, this.vendor, this.image})
+  final int? productId;
+  const ReturnedItem(
+      {Key? key, required this.text, this.vendor, this.image, this.productId})
       : super(key: key);
 
   @override
@@ -231,7 +235,8 @@ class ReturnedItem extends StatelessWidget {
           ),
         ),
         if (text != 'Take a photo to get started!' &&
-            vendor != null) // Added condition
+            vendor != null &&
+            productId != null) // Add productId check
           Container(
             height: 90,
             width: 90,
@@ -243,7 +248,8 @@ class ReturnedItem extends StatelessWidget {
               builder: (BuildContext buttonContext) {
                 return IconButton(
                   onPressed: () {
-                    getProductAndNavigate(buttonContext);
+                    getProductAndNavigate(
+                        buttonContext, productId!); // Pass productId here
                   },
                   icon: const Icon(
                     Icons.local_mall,
@@ -259,12 +265,11 @@ class ReturnedItem extends StatelessWidget {
   }
 }
 
-Future<void> getProductAndNavigate(BuildContext context) async {
-  String? productUrl = await getProductUrl(7772869361887);
+Future<void> getProductAndNavigate(BuildContext context, int productId) async {
+  String? productUrl = await getProductUrl(productId);
   print(productUrl);
 
   if (productUrl != null) {
-    // ignore: use_build_context_synchronously
     Navigator.push(
       context,
       MaterialPageRoute(

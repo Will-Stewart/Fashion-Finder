@@ -1,0 +1,127 @@
+@startuml
+set namespaceSeparator ::
+
+class "fashionfinder::page::cart_page.dart::CartPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::cart_page.dart::CartPage"
+
+class "fashionfinder::page::cart_page.dart::DarkBar" {
+  +Size preferredSize
+  +Widget build()
+}
+
+"fashionfinder::page::cart_page.dart::DarkBar" o-- "dart::ui::Size"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::cart_page.dart::DarkBar"
+"flutter::src::widgets::preferred_size.dart::PreferredSizeWidget" <|-- "fashionfinder::page::cart_page.dart::DarkBar"
+
+class "fashionfinder::page::store_page.dart::StorePage" {
+  +String url
+  +_StorePageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "fashionfinder::page::store_page.dart::StorePage"
+
+class "fashionfinder::page::store_page.dart::_StorePageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "fashionfinder::page::store_page.dart::_StorePageState"
+
+class "fashionfinder::page::store_page.dart::WebViewApp" {
+  +String url
+  +WebViewController controller
+  +State<WebViewApp> createState()
+}
+
+"fashionfinder::page::store_page.dart::WebViewApp" o-- "webview_flutter::src::webview.dart::WebViewController"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "fashionfinder::page::store_page.dart::WebViewApp"
+
+class "fashionfinder::page::store_page.dart::_WebViewAppState" {
+  +Size preferredSize
+  +Widget build()
+}
+
+"fashionfinder::page::store_page.dart::_WebViewAppState" o-- "dart::ui::Size"
+"flutter::src::widgets::framework.dart::State" <|-- "fashionfinder::page::store_page.dart::_WebViewAppState"
+
+class "fashionfinder::page::home_page.dart::HomePage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::home_page.dart::HomePage"
+
+class "fashionfinder::page::home_page.dart::Home" {
+  +_HomeState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "fashionfinder::page::home_page.dart::Home"
+
+class "fashionfinder::page::home_page.dart::_HomeState" {
+  +List<CameraDescription>? cameras
+  +CameraController? controller
+  +XFile? image
+  +String? textResponse
+  +String? predictedText
+  +String? itemVendor
+  +Uint8List? productImage
+  +ValueNotifier<String?> predictedTextNotifier
+  +ValueNotifier<Uint8List?> productImageNotifier
+  +void initState()
+  +dynamic loadCamera()
+  +Widget build()
+}
+
+"fashionfinder::page::home_page.dart::_HomeState" o-- "camera::src::camera_controller.dart::CameraController"
+"fashionfinder::page::home_page.dart::_HomeState" o-- "cross_file::src::types::interface.dart::XFile"
+"fashionfinder::page::home_page.dart::_HomeState" o-- "dart::typed_data::Uint8List"
+"fashionfinder::page::home_page.dart::_HomeState" o-- "flutter::src::foundation::change_notifier.dart::ValueNotifier<String>"
+"fashionfinder::page::home_page.dart::_HomeState" o-- "flutter::src::foundation::change_notifier.dart::ValueNotifier<Uint8List>"
+"flutter::src::widgets::framework.dart::State" <|-- "fashionfinder::page::home_page.dart::_HomeState"
+
+class "fashionfinder::page::home_page.dart::ReturnedItem" {
+  +String text
+  +String? vendor
+  +Uint8List? image
+  +Widget build()
+}
+
+"fashionfinder::page::home_page.dart::ReturnedItem" o-- "dart::typed_data::Uint8List"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::home_page.dart::ReturnedItem"
+
+class "fashionfinder::page::home_page.dart::PhotoPreview" {
+  +XFile? image
+  +Widget build()
+}
+
+"fashionfinder::page::home_page.dart::PhotoPreview" o-- "cross_file::src::types::interface.dart::XFile"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::home_page.dart::PhotoPreview"
+
+class "fashionfinder::page::home_page.dart::DarkBar" {
+  +Size preferredSize
+  +Widget build()
+}
+
+"fashionfinder::page::home_page.dart::DarkBar" o-- "dart::ui::Size"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "fashionfinder::page::home_page.dart::DarkBar"
+"flutter::src::widgets::preferred_size.dart::PreferredSizeWidget" <|-- "fashionfinder::page::home_page.dart::DarkBar"
+
+class "fashionfinder::main.dart::BottomNavBar" {
+  +_BottomNavBarState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "fashionfinder::main.dart::BottomNavBar"
+
+class "fashionfinder::main.dart::_BottomNavBarState" {
+  -int _page
+  +List<Widget> Screens
+  -GlobalKey<CurvedNavigationBarState> _bottomNavigationKey
+  +Widget build()
+}
+
+"fashionfinder::main.dart::_BottomNavBarState" o-- "flutter::src::widgets::framework.dart::GlobalKey<CurvedNavigationBarState>"
+"flutter::src::widgets::framework.dart::State" <|-- "fashionfinder::main.dart::_BottomNavBarState"
+
+
+@enduml

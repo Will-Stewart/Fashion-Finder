@@ -5,6 +5,7 @@ import 'package:fashionfinder/page/cart_page.dart';
 import 'package:fashionfinder/page/store_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:camera/camera.dart';
+import 'package:dcdg/dcdg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
