@@ -8,9 +8,8 @@ String password = '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';
 String storeUrl = 'modassilviabenitez.myshopify.com';
 
 Future<Map<String, dynamic>> searchProductsByTags(List<String> tags) async {
-  String endpoint = '/admin/api/2023-04/products.json';
-  String url =
-      'https://$apiKey:$password@$storeUrl$endpoint?tags=${tags.join(',')}';
+  String endpoint = '/admin/api/2023-04/products.json?limit=250';
+  String url = 'https://$apiKey:$password@$storeUrl$endpoint';
 
   http.Response response = await http.get(Uri.parse(url));
 
@@ -21,15 +20,18 @@ Future<Map<String, dynamic>> searchProductsByTags(List<String> tags) async {
 
     // Calculate the number of matching tags for each product
     List<int> tagCounts = products.map((product) {
-      List<String> productTags = product['tags'].split(',');
+      List<String> productTags = product['tags'].split(RegExp(r',\s|\$'));
       int count = 0;
 
       for (String tag in tags) {
-        if (productTags.contains(tag)) {
+        if (productTags.any(
+            (productTag) => productTag.toLowerCase() == tag.toLowerCase())) {
           count++;
         }
       }
 
+      print(
+          'Product: ${product['title']}, Matching Tags: $count, Tags: ${productTags.join(', ')}');
       return count;
     }).toList();
 
@@ -38,6 +40,7 @@ Future<Map<String, dynamic>> searchProductsByTags(List<String> tags) async {
         tagCounts.reduce((value, element) => value > element ? value : element);
     int maxIndex = tagCounts.indexOf(maxCount);
     Map<String, dynamic> closestMatch = products[maxIndex];
+
     print(closestMatch);
     return closestMatch;
   } else {
