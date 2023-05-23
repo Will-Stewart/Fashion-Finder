@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -46,6 +47,14 @@ class DarkBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 // Widgets
+List<String> imageList = [
+  "https://upload.wikimedia.org/wikipedia/en/2/21/The_dress_blueblackwhitegold.jpg",
+  "https://www.refinery29.com/images/11162356.jpg?format=webp&width=720&height=864&quality=85",
+  "https://images.asos-media.com/products/stradivarius-straight-leg-cargo-trouser-in-khaki/203826315-1-khaki?\$n_480w\$&wid=476&fit=constrain",
+  "https://cdn-1.azazie.com/upimg/h65/e6/9b/fa6585315564aaa34f22e791b0c2e69b.jpg",
+  "https://www.na-kd.com/globalassets/nakd_wrap_shirt_dress_1100-006878-0305_1453.jpg?ref=F498A2C411"
+];
+
 Widget recentScanned = Column(
   children: [
     Padding(
@@ -73,12 +82,23 @@ Widget recentScanned = Column(
               Color.fromARGB(255, 138, 138, 138),
             ],
           )),
-      child: const Center(
-        child: Text(
-          "Carosel Of Recent Scans Here",
-          style: TextStyle(color: Colors.white, fontSize: 18),
-          textAlign: TextAlign.center,
-        ),
+      child: CarouselSlider(
+        options: CarouselOptions(
+            height: 150.0, aspectRatio: 355 / 150, viewportFraction: 1.0),
+        items: imageList.map((image) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  child: Image.network(image, fit: BoxFit.contain),
+                ),
+              );
+            },
+          );
+        }).toList(),
       ),
     )
   ],
