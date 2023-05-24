@@ -212,13 +212,13 @@ class ReturnedItem extends StatelessWidget {
           flex: 1,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 text,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.libreBaskerville(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.black),
               ),
@@ -229,7 +229,7 @@ class ReturnedItem extends StatelessWidget {
                     vendor!,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.libreBaskerville(
-                        fontSize: 16,
+                        fontSize: 13,
                         fontWeight: FontWeight.w400,
                         color: Colors.black),
                   ),
