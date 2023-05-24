@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fashionfinder/page/store_page.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../functions/vision_api.dart';
 import '../functions/shopify_api.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
     );
@@ -20,6 +21,8 @@ class HomePage extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -133,7 +136,7 @@ class _HomeState extends State<Home> {
                     print(e); //show error
                   }
                 },
-                child: const Icon(Icons.camera),
+                child: const Icon(MdiIcons.camera),
               ),
             ),
             Align(
@@ -270,6 +273,7 @@ Future<void> getProductAndNavigate(BuildContext context, int productId) async {
   print(productUrl);
 
   if (productUrl != null) {
+    // ignore: use_build_context_synchronously
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -308,7 +312,14 @@ class PhotoPreview extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         child: image == null
-            ? const Text("No image captured")
+            ? Text(
+                "No image captured",
+                style: GoogleFonts.libreBaskerville(
+                    textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                )),
+              )
             : Image.file(
                 File(image!.path),
                 height: 150,

@@ -25,10 +25,10 @@ class StorePage extends StatefulWidget {
   final String url;
 
   // Default constructor with required parameter
-  StorePage({Key? key, required this.url}) : super(key: key);
+  const StorePage({Key? key, required this.url}) : super(key: key);
 
   // Additional constructor with default URL value
-  StorePage.defaultUrl({Key? key})
+  const StorePage.defaultUrl({Key? key})
       : url = 'https://modassilviabenitez.myshopify.com/',
         super(key: key);
 
@@ -99,6 +99,5 @@ class _WebViewAppState extends State<WebViewApp> {
     );
   }
 
-  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

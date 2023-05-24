@@ -7,7 +7,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: DarkBar(),
+        appBar: const DarkBar(),
         body: ListView(children: <Widget>[
           recentScanned,
           savedCart,
@@ -90,9 +90,9 @@ Widget recentScanned = Column(
             builder: (BuildContext context) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   child: Image.network(image, fit: BoxFit.contain),
                 ),
               );
@@ -145,7 +145,7 @@ Widget savedCart = Column(
         )),
       ),
     ),
-    Container(
+    SizedBox(
       height: 390.0,
       width: 355.0,
       child: ListView.builder(

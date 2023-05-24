@@ -5,12 +5,12 @@ import 'package:fashionfinder/page/cart_page.dart';
 import 'package:fashionfinder/page/store_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:camera/camera.dart';
-import 'package:dcdg/dcdg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: BottomNavBar()));
+  runApp(const MaterialApp(
+      debugShowCheckedModeBanner: false, home: BottomNavBar()));
 }
 
 class BottomNavBar extends StatefulWidget {
@@ -24,9 +24,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 1;
 
   final Screens = [
-    StorePage.defaultUrl(),
-    HomePage(),
-    CartPage(),
+    const StorePage.defaultUrl(),
+    const HomePage(),
+    const CartPage(),
   ];
 
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -42,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items: const <Widget>[
           Icon(MdiIcons.store,
               size: 40, color: Color.fromARGB(255, 255, 255, 255)),
-          Icon(MdiIcons.camera,
+          Icon(MdiIcons.tshirtCrew,
               size: 42, color: Color.fromARGB(255, 255, 255, 255)),
           Icon(MdiIcons.cart,
               size: 40, color: Color.fromARGB(255, 255, 255, 255)),

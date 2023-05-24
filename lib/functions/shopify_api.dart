@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:image/image.dart';
 import 'dart:typed_data';
 
 String apiKey = '843a68fd4d418ea88f5b09866b1fa814';
