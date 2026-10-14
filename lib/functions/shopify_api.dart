@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:image/image.dart';
 import 'dart:typed_data';
 
-String apiKey = '843a68fd4d418ea88f5b09866b1fa814';
-String password = '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';
+String apiKey = 'removed';
+String password = 'removed';
 String storeUrl = 'modassilviabenitez.myshopify.com';
 
 Future<Map<String, dynamic>> searchProductsByTags(List<String> tags) async {
